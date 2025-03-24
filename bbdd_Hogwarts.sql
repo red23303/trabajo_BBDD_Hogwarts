@@ -67,25 +67,3 @@ CREATE TABLE Reservas (
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
     FOREIGN KEY (id_libro) REFERENCES Libros(id_libro)
 );
-
-CREATE VIEW vista_actividad_reciente AS
-SELECT 
-    'Préstamo' AS tipo_actividad,
-    l.titulo AS libro,
-    u.nombre AS usuario,
-    p.fecha_prestamo AS fecha
-FROM Prestamos p
-JOIN Libros l ON p.id_libro = l.id_libro
-JOIN Usuarios u ON p.id_usuario = u.id_usuario
-UNION ALL
-SELECT 
-    'Reserva' AS tipo_actividad,
-    l.titulo AS libro,
-    u.nombre AS usuario,
-    r.fecha_reserva AS fecha
-FROM Reservas r
-JOIN Libros l ON r.id_libro = l.id_libro
-JOIN Usuarios u ON r.id_usuario = u.id_usuario
-ORDER BY fecha DESC
-LIMIT 10;
-
