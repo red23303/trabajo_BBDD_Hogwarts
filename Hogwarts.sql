@@ -67,6 +67,43 @@ CREATE TABLE Reservas (
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
     FOREIGN KEY (id_libro) REFERENCES Libros(id_libro)
 );
+
+-- Usuario: Albus Dumbledore (Administrador)
+CREATE USER 'albus_dumbledore'@'localhost' IDENTIFIED BY 'FenixEterno1945!';
+GRANT ALL PRIVILEGES ON biblioteca_hogwarts.* TO 'albus_dumbledore'@'localhost' WITH GRANT OPTION;
+
+-- Usuario: Minerva McGonagall (Profesora)
+CREATE USER 'minerva_mcgonagall'@'localhost' IDENTIFIED BY 'GatoAnimago1905!';
+GRANT SELECT, INSERT, UPDATE ON biblioteca_hogwarts.Prestamos TO 'minerva_mcgonagall'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON biblioteca_hogwarts.Reservas TO 'minerva_mcgonagall'@'localhost';
+GRANT SELECT ON biblioteca_hogwarts.Libros TO 'minerva_mcgonagall'@'localhost';
+
+-- Usuario: Hermione Granger (Estudiante ejemplar)
+CREATE USER 'hermione_granger'@'localhost' IDENTIFIED BY 'AccioConocimiento1991!';
+GRANT SELECT ON biblioteca_hogwarts.Libros TO 'hermione_granger'@'localhost';
+GRANT INSERT ON biblioteca_hogwarts.Reservas TO 'hermione_granger'@'localhost';
+GRANT SELECT ON biblioteca_hogwarts.Reservas TO 'hermione_granger'@'localhost';
+
+-- Usuario: Irma Pince (Bibliotecaria estricta)
+CREATE USER 'irma_pince'@'localhost' IDENTIFIED BY 'SilencioEnLaBiblioteca!';
+GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca_hogwarts.Libros TO 'irma_pince'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca_hogwarts.Autores TO 'irma_pince'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca_hogwarts.Editoriales TO 'irma_pince'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca_hogwarts.Secciones TO 'irma_pince'@'localhost';
+
+-- Usuario: Draco Malfoy (Estudiante Slytherin)
+CREATE USER 'draco_malfoy'@'localhost' IDENTIFIED BY 'SangrePura1991!';
+GRANT SELECT ON biblioteca_hogwarts.Libros TO 'draco_malfoy'@'localhost';
+GRANT INSERT ON biblioteca_hogwarts.Reservas TO 'draco_malfoy'@'localhost';
+GRANT SELECT ON biblioteca_hogwarts.Reservas TO 'draco_malfoy'@'localhost';
+
+-- Usuario: Tom Riddle (Archivista oscuro, sólo lectura)
+CREATE USER 'tom_riddle'@'localhost' IDENTIFIED BY 'Horcrux1938!';
+GRANT SELECT ON biblioteca_hogwarts.* TO 'tom_riddle'@'localhost';
+
+-- Aplicar cambios mágicos
+FLUSH PRIVILEGES;
+
 -- Insertar datos en la tabla Secciones
 INSERT INTO Secciones (nombre_seccion) VALUES 
 ('Sección de Hechizos'),
