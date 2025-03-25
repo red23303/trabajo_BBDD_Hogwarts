@@ -15,7 +15,7 @@ CREATE TABLE Usuarios (
 CREATE TABLE Autores (
     id_autor INT AUTO_INCREMENT PRIMARY KEY,
     nombre_autor VARCHAR(100) NOT NULL,
-    sangre_pura ENUM('Sí', 'No') NOT NULL,
+    sangre_pura BOOLEAN,
     nacionalidad VARCHAR(50) NOT NULL
 );
 
